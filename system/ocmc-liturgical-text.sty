@@ -949,6 +949,42 @@ Script=Arabic%
     }%
     \end{centering}%
 }%
+\DeclareDocumentCommand\ltRegularTitle{m m g g g g g g}{%
+    \begin{centering}%
+    \ltSidsFormat{\ltTextRedBold}{\ltTextRedBold}{\ltTextRedBold}{\ltTextRedBold}%
+    \IfValueTF{#7}{%
+        \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
+    }{%
+        \IfValueTF{#5}{%
+             \ltSids{#1}{#2}{#3}{#4}{#5}{#6}%
+        }{%
+            \IfValueTF{#3}{%
+                 \ltSids{#1}{#2}{#3}{#4}%
+            }{%
+                 \ltSids{#1}{#2}%
+            }%
+        }%
+    }%
+    \end{centering}%
+}%
+\DeclareDocumentCommand\ltTitleZero{m m g g g g g g}{%
+    \begin{centering}%
+    \ltSidsFormat{\ltTextRedBold}{\ltTextRedBold}{\ltTextRedBold}{\ltTextRedBold}%
+    \IfValueTF{#7}{%
+        \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
+    }{%
+        \IfValueTF{#5}{%
+             \ltSids{#1}{#2}{#3}{#4}{#5}{#6}%
+        }{%
+            \IfValueTF{#3}{%
+                 \ltSids{#1}{#2}{#3}{#4}%
+            }{%
+                 \ltSids{#1}{#2}%
+            }%
+        }%
+    }%
+    \end{centering}%
+}%
 \DeclareDocumentCommand\ltDialog{m m g g g g g g}{%
     \ltSidsFormat{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}%
     \IfValueTF{#7}{%
@@ -1170,9 +1206,16 @@ Script=Arabic%
 \DeclareDocumentCommand\ltPrayerItalics{ m m g g g g g g}{%
     \ltSidsFormat{\ltTextBlackItalics}{\ltTextBlackItalics}{\ltTextBlackItalics}{\ltTextBlackItalics}%
     \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
-}\DeclareDocumentCommand\ltReading{ m m g g g g g g}{%
+}
+\DeclareDocumentCommand\ltReading{ m m g g g g g g}{%
     \ltSidsFormat{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}%
     \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
+}
+\DeclareDocumentCommand\ltReadingCenter{ m m g g g g g g}{%
+    \ltSidsFormat{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}%
+    \begin{center}
+    \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
+    \end{center}
 }
 \DeclareDocumentCommand\ltReadingRubric{m m m m g g g g}{%
     \IfValueTF{#7}{%
@@ -1240,6 +1283,10 @@ Script=Arabic%
     \ltSidsFormat{\ltTextRedItalics}{\ltTextRedItalics}{\ltTextRedItalics}{\ltTextRedItalics}%
     \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
 }
+\DeclareDocumentCommand\ltReadingItalics{ m m g g g g g g}{%
+    \ltSidsFormat{\ltTextItalics}{\ltTextItalics}{\ltTextItalics}{\ltTextItalics}%
+    \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
+}
 \DeclareDocumentCommand\ltRubricItalics{ m m g g g g g g}{%
     \ltSidsFormat{\ltTextRedItalics}{\ltTextRedItalics}{\ltTextRedItalics}{\ltTextRedItalics}%
     \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
@@ -1250,6 +1297,11 @@ Script=Arabic%
 }%
 #1%
 }%
+
+\DeclareDocumentCommand\ltPara{ m m g g g g g g}{%
+    \ltSidsFormat{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}%
+    \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
+}
 
 \DeclareDocumentCommand\ltVerse{ m m g g g g g g}{%
     \ltSidsFormat{\ltTextBlackItalics}{\ltTextBlackItalics}{\ltTextBlackItalics}{\ltTextBlackItalics}%
