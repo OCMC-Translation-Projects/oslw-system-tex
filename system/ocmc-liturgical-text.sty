@@ -64,6 +64,15 @@
     \booltrue{supportKorean}%
 }
 
+%% Support Chinese option
+\newbool{supportChinese}%
+\boolfalse{supportChinese}%
+\DeclareOption{chinese}{%
+    \booltrue{supportChinese}%
+}
+
+
+
 \ProcessOptions*
 \ifbool{debugKeys}{%
     \RequirePackage[debug]{system/i18n-topic-key}%
@@ -144,6 +153,12 @@ addtohook={%
 \setCJKsansfont{fonts/korean/UnGungseo.ttf}%
 \setCJKmonofont{fonts/korean/gulim.ttf}%
 }{}
+
+\ifbool{supportChinese}{%
+\usepackage{xeCJK} % for asian languages
+\setCJKmainfont[Path=\myFontDir/chinese/]{simsun.ttf}%
+}{} 
+
 
 \newcommand{\ltSetColor}[1]{%
 \color{#1}%
