@@ -39,7 +39,6 @@
 % memoir package settings
 \setsecnumdepth{none}
 \maxsecnumdepth{none}
-\titleformat{\section}[block]{\color{blue}\Large\bfseries\filcenter}{}{0.5em}{}
 \pagestyle{ruled}
 
 % header and footer settings
@@ -52,6 +51,36 @@
 \setbool{subsectionInHeader}{true}% false to turn off 
 {\addtolength{\beforechapskip}{1\baselineskip}
 {\addtolength{\afterchapskip}{1\baselineskip}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title spacing
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Redefine how titlesec handles chapter headings
+\makeatletter
+\def\@makechapterhead#1{%
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+        \huge\bfseries \@chapapp\space \thechapter
+        \par\nobreak
+%%        \vskip 1\p@
+    \fi
+    \interlinepenalty\@M
+    \Huge \bfseries #1\par\nobreak
+%%    \vskip 1\p@
+  }}
+\def\@makeschapterhead#1{%
+  {\parindent \z@ \raggedright
+    \normalfont
+    \interlinepenalty\@M
+    \Huge \bfseries  #1\par\nobreak
+%%    \vskip 1\p@
+  }}
+\makeatother
+
+% set spacing for other types of titles
+\titlespacing\section{0pt}{0pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+\titlespacing\subsection{0pt}{0pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+\titlespacing\subsubsection{0pt}{0pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
 
 % to help with avoiding overfull 
 % hbox with narrow columns.

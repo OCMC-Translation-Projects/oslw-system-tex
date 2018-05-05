@@ -71,8 +71,6 @@
     \booltrue{supportChinese}%
 }
 
-
-
 \ProcessOptions*
 \ifbool{debugKeys}{%
     \RequirePackage[debug]{system/i18n-topic-key}%
@@ -87,7 +85,7 @@
 \usepackage{microtype} % Improves character and word spacing
 \usepackage{comment} % comment out lines with \begin{comment} ... \end{comment}
 \usepackage{ragged2e} % so margins can be ragged
-\usepackage{titlesec}
+\usepackage[compact]{titlesec}
 \usepackage{parskip}
 \usepackage{titling}
 \usepackage{trimspaces}
@@ -95,6 +93,7 @@
 \usepackage{color}% used by paracol
 \RequirePackage{xstring}% for case statements
 \usepackage{paracol}% parallel columns
+\usepackage[switch]{lineno}
 %----------------------------------------------------------------------------------------
 %	HYPERLINKS IN THE DOCUMENTS
 %----------------------------------------------------------------------------------------
@@ -128,6 +127,13 @@ addtohook={%
 \fi%
 }%
 }
+
+\usepackage[bibstyle=verbose,citestyle=authoryear,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,bibencoding=utf8, backend=biber]{biblatex}
+% Manually add entries to references.bib to ovoid glut and UTF-8 issues
+\addbibresource{system/references.bib} % BibTeX bibliography file
+\defbibheading{bibempty}{}
+
+
 %=============================================
 % FONT SETUP
 %=============================================
@@ -157,8 +163,7 @@ addtohook={%
 \ifbool{supportChinese}{%
 \usepackage{xeCJK} % for asian languages
 \setCJKmainfont[Path=\myFontDir/chinese/]{simsun.ttf}%
-}{} 
-
+}{}
 
 \newcommand{\ltSetColor}[1]{%
 \color{#1}%
@@ -964,42 +969,6 @@ Script=Arabic%
     }%
     \end{centering}%
 }%
-\DeclareDocumentCommand\ltRegularTitle{m m g g g g g g}{%
-    \begin{centering}%
-    \ltSidsFormat{\ltTextRedBold}{\ltTextRedBold}{\ltTextRedBold}{\ltTextRedBold}%
-    \IfValueTF{#7}{%
-        \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
-    }{%
-        \IfValueTF{#5}{%
-             \ltSids{#1}{#2}{#3}{#4}{#5}{#6}%
-        }{%
-            \IfValueTF{#3}{%
-                 \ltSids{#1}{#2}{#3}{#4}%
-            }{%
-                 \ltSids{#1}{#2}%
-            }%
-        }%
-    }%
-    \end{centering}%
-}%
-\DeclareDocumentCommand\ltTitleZero{m m g g g g g g}{%
-    \begin{centering}%
-    \ltSidsFormat{\ltTextRedBold}{\ltTextRedBold}{\ltTextRedBold}{\ltTextRedBold}%
-    \IfValueTF{#7}{%
-        \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
-    }{%
-        \IfValueTF{#5}{%
-             \ltSids{#1}{#2}{#3}{#4}{#5}{#6}%
-        }{%
-            \IfValueTF{#3}{%
-                 \ltSids{#1}{#2}{#3}{#4}%
-            }{%
-                 \ltSids{#1}{#2}%
-            }%
-        }%
-    }%
-    \end{centering}%
-}%
 \DeclareDocumentCommand\ltDialog{m m g g g g g g}{%
     \ltSidsFormat{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}%
     \IfValueTF{#7}{%
@@ -1221,16 +1190,9 @@ Script=Arabic%
 \DeclareDocumentCommand\ltPrayerItalics{ m m g g g g g g}{%
     \ltSidsFormat{\ltTextBlackItalics}{\ltTextBlackItalics}{\ltTextBlackItalics}{\ltTextBlackItalics}%
     \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
-}
-\DeclareDocumentCommand\ltReading{ m m g g g g g g}{%
+}\DeclareDocumentCommand\ltReading{ m m g g g g g g}{%
     \ltSidsFormat{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}%
     \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
-}
-\DeclareDocumentCommand\ltReadingCenter{ m m g g g g g g}{%
-    \ltSidsFormat{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}%
-    \begin{center}
-    \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
-    \end{center}
 }
 \DeclareDocumentCommand\ltReadingRubric{m m m m g g g g}{%
     \IfValueTF{#7}{%
@@ -1298,10 +1260,6 @@ Script=Arabic%
     \ltSidsFormat{\ltTextRedItalics}{\ltTextRedItalics}{\ltTextRedItalics}{\ltTextRedItalics}%
     \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
 }
-\DeclareDocumentCommand\ltReadingItalics{ m m g g g g g g}{%
-    \ltSidsFormat{\ltTextItalics}{\ltTextItalics}{\ltTextItalics}{\ltTextItalics}%
-    \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
-}
 \DeclareDocumentCommand\ltRubricItalics{ m m g g g g g g}{%
     \ltSidsFormat{\ltTextRedItalics}{\ltTextRedItalics}{\ltTextRedItalics}{\ltTextRedItalics}%
     \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
@@ -1312,11 +1270,6 @@ Script=Arabic%
 }%
 #1%
 }%
-
-\DeclareDocumentCommand\ltPara{ m m g g g g g g}{%
-    \ltSidsFormat{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}%
-    \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
-}
 
 \DeclareDocumentCommand\ltVerse{ m m g g g g g g}{%
     \ltSidsFormat{\ltTextBlackItalics}{\ltTextBlackItalics}{\ltTextBlackItalics}{\ltTextBlackItalics}%
