@@ -127,10 +127,17 @@ innerleftmargin=0.5cm,innerrightmargin=0.5cm,roundcorner=10pt}
 \newcommand{\macfullref}[1]{(\getfullref{#1})}
 \definelingstyle{ocmc}{glstyle=nlevel,extraglskip=1em}
 
+\usepackage[object=vectorian]{pgfornament}
+
 \newcommand{\noteLexical}[2]{%
 \ding{68} \ \textbf{#1} \textbullet \ #2%
 }%
-
+\newcommand{\noteLexicalText}[3]{%
+\ding{68} \ \textbf{#1} \textbullet \ #2 \textbullet \ #3%
+}%
+\newcommand{\noteLexicalTitleText}[4]{%
+\ding{68} \ \textbf{#1} \textbullet \ #2 \textbullet \ #3 \textbullet \ #4%
+}%
 \newcommand{\noteMeaning}[1]{%
 \textbullet \ MEANING #1%
 }%
@@ -206,6 +213,18 @@ innerleftmargin=0.5cm,innerrightmargin=0.5cm,roundcorner=10pt}
 \newcommand{\noteRefToBible}[2]{%
 \textbullet \ REFERS TO BIBLICAL TEXT \ding{223} #1 #2%
 }%
+
+\newcommand{\noteRefersTo}[6]{%
+\ding{68} \ \textbf{#1} \textbullet \ #2 \  \ding{223} #3 \textbullet \ #4%
+}%
+\newcommand{\noteLexicalRefToBible}[5]{%
+\ding{68} \ \textbf{#1} \textbullet \ #2 \ding{223} #3 #4 \textbullet \ #5%
+}%
+
+\newcommand{\noteLexicalRefToBibleTitle}[6]{%
+\ding{68} \ \textbf{#1} \textbullet \ #2 \  \ding{223} #3 #4 \textbullet \ #5  \textbullet \ #6%
+}%
+
 \newcommand{\noteTranslatorsNote}[1]{%
 \textbullet \ TRANSLATOR'S NOTE \ding{223} #1%
 }%
@@ -214,6 +233,19 @@ innerleftmargin=0.5cm,innerrightmargin=0.5cm,roundcorner=10pt}
 }%
 \newcommand{\noteVocabulary}[1]{%
 \textbullet \ VOCABULARY \ding{223} #1%
+}%
+\newcommand{\sectionline}{%
+  \noindent
+  \begin{center}
+    {\color{red}
+    \resizebox{0.5\linewidth}{1ex}
+    {{%
+    {\begin{tikzpicture}
+    \node  (C) at (0,0) {};
+    \node (D) at (9,0) {};
+    \path (C) to [ornament=85] (D);
+    \end{tikzpicture}}}}}%
+    \end{center}%
 }%
 
 \endinput
