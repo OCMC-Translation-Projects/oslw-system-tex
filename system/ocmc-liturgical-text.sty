@@ -89,11 +89,10 @@
 \usepackage{parskip}
 \usepackage{titling}
 \usepackage{trimspaces}
-\usepackage[margin=1in]{geometry}%
 \usepackage{color}% used by paracol
 \RequirePackage{xstring}% for case statements
 \usepackage{paracol}% parallel columns
-\usepackage[switch]{lineno}
+
 %----------------------------------------------------------------------------------------
 %	HYPERLINKS IN THE DOCUMENTS
 %----------------------------------------------------------------------------------------
@@ -128,11 +127,20 @@ addtohook={%
 }%
 }
 
-\usepackage[bibstyle=verbose,citestyle=authoryear,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,bibencoding=utf8, backend=biber]{biblatex}
-% Manually add entries to references.bib to ovoid glut and UTF-8 issues
-\addbibresource{system/references.bib} % BibTeX bibliography file
-\defbibheading{bibempty}{}
+%----------------------------------------------------------------------------------------
+%       BIBLIOGRAPHY AND INDEX
+%
+% see https://tex.stackexchange.com/questions/141957/the-most-basic-biblatex-example
+% use \autocite{Mary:1998}
+%----------------------------------------------------------------------------------------
 
+\usepackage[bibstyle=verbose,citestyle=authoryear,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,bibencoding=utf8, backend=biber]{biblatex}
+\defbibheading{bibempty}{}
+%---------------------------------------------------------------
+
+\usepackage{calc} % For simpler calculation - used for spacing the index letter headings correctly
+\usepackage{makeidx} % Required to make an index
+\makeindex % Tells LaTeX to create the files required for indexing
 
 %=============================================
 % FONT SETUP
