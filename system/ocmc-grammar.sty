@@ -6,7 +6,7 @@
 \usepackage{tikz-dependency} % for dependency trees
 \usepackage{pythontex}
 \usepackage{xpatch}
-
+\usepackage{xparse}
 \usepackage{qtree}% alternative to tikz-depenency
 
 \usepackage{drs}% alternative for dependency diagram
@@ -139,19 +139,19 @@ innerleftmargin=0.5cm,innerrightmargin=0.5cm,roundcorner=10pt}
 \ding{68} \ \textbf{#1} \textbullet \ #2 \textbullet \ #3 \textbullet \ #4%
 }%
 \newcommand{\noteMeaning}[1]{%
-\textbullet \ MEANING #1%
+\textbullet \ MEANING \textbullet \ #1%
 }%
 
 \newcommand{\noteGrammar}[1]{%
-\textbullet \ GRAMMAR #1%
+\textbullet \ GRAMMAR \textbullet \ #1%
 }%
 
 \newcommand{\noteAdviceTrans}[1]{%
-\textbullet \ ADVICE FOR TRANSLATOR #1%
+\textbullet \ ADVICE FOR TRANSLATOR \textbullet \ #1%
 }%
 
 \newcommand{\noteAdviceTester}[1]{%
-\textbullet \ ADVICE FOR TESTER #1%
+\textbullet \ ADVICE FOR TESTER \textbullet \ #1%
 }%
 \newcommand{\noteCulture}[1]{%
 \textbullet \ CULTURE \ding{223} #1%
@@ -162,61 +162,89 @@ innerleftmargin=0.5cm,innerrightmargin=0.5cm,roundcorner=10pt}
 \newcommand{\noteGeography}[1]{%
 \textbullet \ GEOGRAPHY \ding{223} #1%
 }%
-\newcommand{\noteGrammar}[1]{%
-\textbullet \ GRAMMAR \ding{223} #1%
-}%
 \newcommand{\noteHistory}[1]{%
 \textbullet \ HISTORY \ding{223} #1%
 }%
 \newcommand{\noteLiturgicalUsage}[1]{%
 \textbullet \ LITURGICAL USAGE \ding{223} #1%
 }%
-\newcommand{\noteRefToGroup}[1]{%
-\textbullet \ REFERS TO GROUP \ding{223} #1%
+\newcommand{\noteRefToGroup}[2]{%
+\textbullet \ REFERS TO GROUP \ding{223} #1  \textbullet \ #2%
 }%
 
-\newcommand{\noteRefToAnimal}[1]{%
-\textbullet \ REFERS TO ANIMAL \ding{223} #1%
+\newcommand{\noteRefToAnimal}[2]{%
+\textbullet \ REFERS TO ANIMAL \ding{223} #1  \textbullet \ #2%
 }%
 
-\newcommand{\noteRefToBeing}[1]{%
-\textbullet \ REFERS TO BEING \ding{223} #1%
+\newcommand{\noteRefToBeing}[2]{%
+\textbullet \ REFERS TO BEING \ding{223} #1  \textbullet \ #2%
 }%
-\newcommand{\noteRefToConcept}[1]{%
-\textbullet \ REFERS TO CONCEPT \ding{223} #1%
+\newcommand{\noteRefToConcept}[2]{%
+\textbullet \ REFERS TO CONCEPT \ding{223} #1  \textbullet \ #2%
 }%
-\newcommand{\noteRefToEvent}[1]{%
-\textbullet \ REFERS TO EVENT \ding{223} #1%
-}%
-
-\newcommand{\noteRefToGod}[1]{%
-\textbullet \ REFERS TO GOD \ding{223} #1%
-}%
-\newcommand{\noteRefToHuman}[1]{%
-\textbullet \ REFERS TO HUMAN \ding{223} #1%
-}%
-\newcommand{\noteRefToMystery}[1]{%
-\textbullet \ REFERS TO MYSTERY \ding{223} #1%
-}%
-\newcommand{\noteRefToObject}[1]{%
-\textbullet \ REFERS TO OBJECT \ding{223} #1%
-}%
-\newcommand{\noteRefToPlace}[1]{%
-\textbullet \ REFERS TO PLACE \ding{223} #1%
-}%
-\newcommand{\noteRefToPlant}[1]{%
-\textbullet \ REFERS TO PLANT \ding{223} #1%
-}%
-\newcommand{\noteRefToRole}[1]{%
-\textbullet \ REFERS TO ROLE \ding{223} #1%
-}%
-\newcommand{\noteRefToBible}[2]{%
-\textbullet \ REFERS TO BIBLICAL TEXT \ding{223} #1 #2%
+\newcommand{\noteRefToEvent}[2]{%
+\textbullet \ REFERS TO EVENT \ding{223} #1  \textbullet \ #2%
 }%
 
-\newcommand{\noteRefersTo}[6]{%
-\ding{68} \ \textbf{#1} \textbullet \ #2 \  \ding{223} #3 \textbullet \ #4%
+\newcommand{\noteRefToGod}[2]{%
+\textbullet \ REFERS TO GOD \ding{223} #1  \textbullet \ #2%
 }%
+\newcommand{\noteRefToHuman}[2]{%
+\textbullet \ REFERS TO HUMAN \ding{223} #1  \textbullet \ #2%
+}%
+\newcommand{\noteRefToMystery}[2]{%
+\textbullet \ REFERS TO MYSTERY \ding{223} #1  \textbullet \ #2%
+}%
+\newcommand{\noteRefToObject}[2]{%
+\textbullet \ REFERS TO OBJECT \ding{223} #1 #2%
+}%
+\newcommand{\noteRefToPlace}[2]{%
+\textbullet \ REFERS TO PLACE \ding{223} #1  \textbullet \ #2%
+}%
+\newcommand{\noteRefToPlant}[2]{%
+\textbullet \ REFERS TO PLANT \ding{223} #1  \textbullet \ #2%
+}%
+\newcommand{\noteRefToRole}[2]{%
+\textbullet \ REFERS TO ROLE \ding{223} #1  \textbullet \ #2%
+}%
+\DeclareDocumentCommand\noteRefToBible{m m g g }{%
+  \IfValueTF{#4}{%
+      \textbullet \ REFERS TO BIBLICAL TEXT \ding{223} #1  \textbullet \ #2 \textbullet \ #3: #4 \ %
+  }{%
+    \IfValueTF{#3}{%
+      \textbullet \ REFERS TO BIBLICAL TEXT \ding{223} #1  \textbullet \ #2: #3 \ %
+    }{%
+      \textbullet \ REFERS TO BIBLICAL TEXT \ding{223} #1  \textbullet \ #2 \ %
+    }%
+  }%
+}%
+\DeclareDocumentCommand\noteCheckYourBible{m m g g }{%
+  \IfValueTF{#4}{%
+      \textbullet \ CHECK YOUR BIBLE \ding{223} #1  \textbullet \ #2 \textbullet \ #3: #4 \ %
+  }{%
+    \IfValueTF{#3}{%
+      \textbullet \ CHECK YOUR BIBLE \ding{223} #1  \textbullet \ #2: #3 \ %
+    }{%
+      \textbullet \ CHECK YOUR BIBLE \ding{223} #1  \textbullet \ #2 \ %
+    }%
+  }%
+}%
+\DeclareDocumentCommand\noteGeneric{m m g }{%
+    \IfValueTF{#3}{%
+      \textbullet \ #1 \textbullet #2: #3 \ %
+    }{%
+      \textbullet \ #1: #2 \ %
+    }%
+}%
+
+\DeclareDocumentCommand\noteRefersTo{m m g}{%
+    \IfValueTF{#3}{%
+      \textbullet \ #1 \ding{223} #2: #3 \ %
+    }{%
+      \textbullet \ #1 \ding{223} #2 \ %
+    }%
+}%
+
 \newcommand{\noteLexicalRefToBible}[5]{%
 \ding{68} \ \textbf{#1} \textbullet \ #2 \ding{223} #3 #4 \textbullet \ #5%
 }%
@@ -225,14 +253,14 @@ innerleftmargin=0.5cm,innerrightmargin=0.5cm,roundcorner=10pt}
 \ding{68} \ \textbf{#1} \textbullet \ #2 \  \ding{223} #3 #4 \textbullet \ #5  \textbullet \ #6%
 }%
 
-\newcommand{\noteTranslatorsNote}[1]{%
-\textbullet \ TRANSLATOR'S NOTE \ding{223} #1%
+\newcommand{\noteTranslatorsNote}[2]{%
+\textbullet \ TRANSLATOR'S NOTE \ding{223} #1 #2%
 }%
 \newcommand{\noteUnit}[1]{%
 \textbullet \ UNIT \ding{223} #1%
 }%
-\newcommand{\noteVocabulary}[1]{%
-\textbullet \ VOCABULARY \ding{223} #1%
+\newcommand{\noteVocabulary}[2]{%
+\textbullet \ VOCABULARY \ding{223} #2%
 }%
 \newcommand{\sectionline}{%
   \noindent
