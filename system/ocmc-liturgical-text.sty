@@ -106,7 +106,7 @@
   ,citecolor=blue
   ,filecolor=blue
   ,linkcolor=blue
-  ,urlcolor= ocre
+  ,urlcolor=blue 
   ,breaklinks=true
 %  ,bookmarks=true
   ,bookmarksopen=false
@@ -133,9 +133,9 @@ addtohook={%
 % see https://tex.stackexchange.com/questions/141957/the-most-basic-biblatex-example
 % use \autocite{Mary:1998}
 %----------------------------------------------------------------------------------------
-
-\usepackage[bibstyle=authoryear,citestyle=authoryear,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,bibencoding=utf8, backend=biber]{biblatex}
-\defbibheading{bibempty}{}
+%now inserted programmatically in tex file
+%\usepackage[bibstyle=authoryear,citestyle=authoryear,sorting=nyt,sortcites=true,autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,bibencoding=utf8, backend=biber]{biblatex}
+%\defbibheading{bibempty}{}
 %---------------------------------------------------------------
 
 \usepackage{calc} % For simpler calculation - used for spacing the index letter headings correctly
@@ -1071,7 +1071,10 @@ Script=Arabic%
     \ltSidsFormat{\ltTextBlueBold}%
     \ltSids{#1}{#2}%
 }
-
+\DeclareDocumentCommand\ltPara{ m m g g g g g g}{%
+    \ltSidsFormat{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}%
+    \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
+}
 \DeclareDocumentCommand\ltHymn{ m m g g g g g g}{%
     \ltSidsFormat{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}%
     \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
@@ -1151,16 +1154,60 @@ Script=Arabic%
     \ltSidsFormat{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}%
     \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
 }
-
+\DeclareDocumentCommand\ltBlackRedBoldRedItalic{ m m g g g g g g}{%
+    \ltSidsFormat{\ltTextBlack}{\ltTextRedBold}{\ltTextRedItalic}{\ltTextRedItalic}%
+    \begin{centering}\ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}\end{centering}%%
+    \ltSidsFormatReset%
+}
 \DeclareDocumentCommand\ltMixedDesignation{ m m g g g g g g}{%
-    \ltSidsFormat{\ltTextRedBold}{\ltTextRedBold}{\ltTextRedBold}{\ltTextRedBold}%
+    \ltSidsFormat{\ltTextRedBold}{\ltTextRedBold}{\ltTextRedItalics}{\ltTextRedItalics}%
     \begin{centering}\ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}\end{centering}%%
     \ltSidsFormatReset%
 }
 
-\DeclareDocumentCommand\ltMixedDesignationMode{ m m g g g g g g}{%
+\DeclareDocumentCommand\ltMixedDesignationDesignation{ m m g g g g g g}{%
     \ltSidsFormat{\ltTextRedBold}{\ltTextRedBold}{\ltTextRedBold}{\ltTextRedBold}%
     \begin{centering}\ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}\end{centering}%%
+    \ltSidsFormatReset%
+}
+\DeclareDocumentCommand\ltMixedTextMode{ m m g g g g g g}{%
+    \ltSidsFormat{\ltTextBlack}{\ltTextRedBold}{\ltTextRedBold}{\ltTextRedBold}%
+    \begin{centering}\ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}\end{centering}%%
+    \ltSidsFormatReset%
+}
+\DeclareDocumentCommand\ltMixedTextModeMelody{ m m g g g g g g}{%
+    \ltSidsFormat{\ltTextBlack}{\ltTextRedBold}{\ltTextRedItalics}{\ltTextRedItalics}%
+    \begin{centering}\ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}\end{centering}%%
+    \ltSidsFormatReset%
+}
+\DeclareDocumentCommand\ltMixedTextRubric{ m m g g g g g g}{%
+    \ltSidsFormat{\ltTextBlack}{\ltTextRedBold}{\ltTextRedBold}{\ltTextRedBold}%
+    \begin{centering}\ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}\end{centering}%%
+    \ltSidsFormatReset%
+}
+\DeclareDocumentCommand\ltMixedTextTextDesignation{ m m g g g g g g}{%
+    \ltSidsFormat{\ltTextBlack}{\ltTextBlack}{\ltTextRedBold}{\ltTextRedBold}%
+    \begin{centering}\ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}\end{centering}%%
+    \ltSidsFormatReset%
+}
+\DeclareDocumentCommand\ltMixedTextDesignation{ m m g g g g g g}{%
+    \ltSidsFormat{\ltTextBlack}{\ltTextRedBold}{\ltTextRedBold}{\ltTextRedBold}%
+    \begin{centering}\ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}\end{centering}%%
+    \ltSidsFormatReset%
+}
+\DeclareDocumentCommand\ltMixedTextDesignationMelody{ m m g g g g g g}{%
+    \ltSidsFormat{\ltTextBlack}{\ltTextRedBold}{\ltTextRedItalics}{\ltTextRedItalics}%
+    \begin{centering}\ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}\end{centering}%%
+    \ltSidsFormatReset%
+}
+\DeclareDocumentCommand\ltMixedDesignationMode{ m m g g g g g g}{%
+    \ltSidsFormat{\ltTextRedBold}{\ltTextRedBold}{\ltTextRedItalics}{\ltTextRedItalics}%
+    \begin{centering}\ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}\end{centering}%%
+    \ltSidsFormatReset%
+}
+\DeclareDocumentCommand\ltHeirmos{ m m g g g g g g}{%
+    \ltSidsFormat{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}%
+    \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%%
     \ltSidsFormatReset%
 }
 \DeclareDocumentCommand\ltHeirmosDesignation{ m m g g g g g g}{%
@@ -1179,8 +1226,12 @@ Script=Arabic%
     \ltSidsFormatReset%
 }
 
+\DeclareDocumentCommand\ltMelody{ m m g g g g g g}{%
+    \ltSidsFormat{\ltTextRedItalics}{\ltTextRedItalics}{\ltTextRedItalics}{\ltTextRedItalics}%
+    \begin{centering}\ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}\end{centering}%%
+}%
 \DeclareDocumentCommand\ltModeMelody{ m m g g g g g g}{%
-    \ltSidsFormat{\ltTextRedBold}{\ltTextRedBold}{\ltTextRedBold}{\ltTextRedBold}%
+    \ltSidsFormat{\ltTextRedBold}{\ltTextRedItalics}{\ltTextRedItalics}{\ltTextRedItalics}%
     \begin{centering}\ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}\end{centering}%%
 }%
 \DeclareDocumentCommand\ltMixedMode{ m m g g g g g g}{%
@@ -1198,7 +1249,8 @@ Script=Arabic%
 \DeclareDocumentCommand\ltPrayerItalics{ m m g g g g g g}{%
     \ltSidsFormat{\ltTextBlackItalics}{\ltTextBlackItalics}{\ltTextBlackItalics}{\ltTextBlackItalics}%
     \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
-}\DeclareDocumentCommand\ltReading{ m m g g g g g g}{%
+}
+\DeclareDocumentCommand\ltReading{ m m g g g g g g}{%
     \ltSidsFormat{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}%
     \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
 }
@@ -1272,6 +1324,10 @@ Script=Arabic%
     \ltSidsFormat{\ltTextRedItalics}{\ltTextRedItalics}{\ltTextRedItalics}{\ltTextRedItalics}%
     \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
 }
+\DeclareDocumentCommand\ltRedItalics{ m m g g g g g g}{%
+    \ltSidsFormat{\ltTextRedItalics}{\ltTextRedItalics}{\ltTextRedItalics}{\ltTextRedItalics}%
+    \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
+}
 \newcommand\ltRed[1]{%
 \ltSetTypeography{%
 \ltColor{red}%
@@ -1283,9 +1339,12 @@ Script=Arabic%
     \ltSidsFormat{\ltTextBlackItalics}{\ltTextBlackItalics}{\ltTextBlackItalics}{\ltTextBlackItalics}%
     \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
 }
-
 \DeclareDocumentCommand\ltVerseRedBold{ m m g g g g g g}{%
     \ltSidsFormat{\ltTextRedBold}{\ltTextBlackItalics}{\ltTextBlackItalics}{\ltTextBlackItalics}%
+    \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
+}
+\DeclareDocumentCommand\ltVerseRedBoldItalics{ m m g g g g g g}{%
+    \ltSidsFormat{\ltTextRedBoldItalics}{\ltTextBlackItalics}{\ltTextBlackItalics}{\ltTextBlackItalics}%
     \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
 }
 \DeclareDocumentCommand\ltVerseRedBoldVersion{m m m m g g g g}{%
@@ -1302,7 +1361,20 @@ Script=Arabic%
         }%
     }%
 }%
-
+\DeclareDocumentCommand\ltVerseVersion{m m m m g g g g}{%
+    \IfValueTF{#7}{%
+        \ltSidsFormat{\ltTextBlack}{\ltTextBlackItalics}{\ltTextBlackItalics}{\ltVersion}%
+        \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
+    }{%
+        \IfValueTF{#5}{%
+            \ltSidsFormat{\ltTextBlack}{\ltTextBlackItalics}{\ltVersion}%
+            \ltSids{#1}{#2}{#3}{#4}{#5}{#6}%
+        }{%
+            \ltSidsFormat{\ltTextBlack}{\ltVersion}%
+                \ltSids{#1}{#2}{#3}{#4}%
+        }%
+    }%
+}%
 % Sets number of columns based on
 % whether or not user has declared
 % a domain for each column
@@ -1919,6 +1991,25 @@ Script=Arabic%
     }%
     \ltSidsFormatReset%
 }
+\DeclareDocumentCommand\ltHymnDesignation{m m m m m m g g} {%
+    \ltSidsFormatReset%
+    {\global\def\sidOneFormat{#1}%
+        \IfValueTF {#7}{%
+            \ltSidsFormat{\ltTextBlack}{\ltTextBlack}{\ltTextBlack}{\ltVersion}%
+            \ltSids{#1}{#2}{#3}{#4}{#5}{#6}{#7}{#8}%
+        }{%
+            \IfValueTF {#5}{%
+            \ltSidsFormat{\ltTextBlack}{\ltTextBlack}{\ltVersion}%
+            \ltSids{#1}{#2}{#3}{#4}{#5}{#6}%
+            }{%
+            \ltSidsFormat{\ltTextBlack}{\ltVersion/}%
+            \ltSids{#1}{#2}{#3}{#4}%
+            }%
+        }%
+    }%
+    \ltSidsFormatReset%
+}
+
 \DeclareDocumentCommand\ltVerseDesignation{m m g g g g g g} {%
     \ltSidsFormatReset%
     {\global\def\sidOneFormat{#1}%
