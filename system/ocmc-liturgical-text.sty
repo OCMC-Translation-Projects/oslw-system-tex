@@ -163,9 +163,9 @@ addtohook={%
 
 \ifbool{supportKorean}{%
 \usepackage{xeCJK} % for asian languages
-\setCJKmainfont{fonts/korean/UnGungseo.ttf}%
-\setCJKsansfont{fonts/korean/UnGungseo.ttf}%
-\setCJKmonofont{fonts/korean/gulim.ttf}%
+\setCJKmainfont[Path=\myFontDir/korean/]{UnGungseo.ttf}%
+\setCJKsansfont[Path=\myFontDir/korean/]{UnGungseo.ttf}%
+\setCJKmonofont[Path=\myFontDir/korean/]{gulim.ttf}%
 }{}
 
 \ifbool{supportChinese}{%
